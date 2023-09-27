@@ -1,28 +1,28 @@
-import logo from "./logo.svg";
-import "./App.css";
-
-import "./scss/app.scss";
-
 import Header from "./components/Header/Header";
 import Sort from "./components/Sort/Sort";
 import Categories from "./components/Categories/Categories";
 import PizzaCard from "./components/PizzaBlock/PizzaCard";
 
+import "./App.css";
+import "./scss/app.scss";
+
+import pizzas from "./assets/pizzas.json";
+
 function App() {
   return (
-    <div class="wrapper">
+    <div className="wrapper">
       <Header />
-      <div class="content">
-        <div class="container">
-          <div class="content__top">
+      <div className="content">
+        <div className="container">
+          <div className="content__top">
             <Categories />
             <Sort />
           </div>
-          <h2 class="content__title">Все пиццы</h2>
-          <div class="content__items">
-            <PizzaCard price={900} title={"Мексиканская"} />
-            <PizzaCard price={600} title={"Пепперони"} />
-            <PizzaCard price={300} title={"Макарони"} />
+          <h2 className="content__title">Все пиццы</h2>
+          <div className="content__items">
+            {pizzas.map((obj) => (
+              <PizzaCard key={obj.id} {...obj} />
+            ))}
           </div>
         </div>
       </div>
