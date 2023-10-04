@@ -19,10 +19,10 @@ const HomePage = ({ searchValue }) => {
     const category = categoryId > 0 ? `category=${categoryId}` : ``;
     const sortBy = sortType.sortProperty.replace("-", "");
     const order = sortType.sortProperty.includes("-") ? "asc" : "desc";
-    // const search = searchValue ? `search=${searchValue}` : ``;
+    const search = searchValue ? `search=${searchValue}` : ``;
 
     fetch(
-      `https://6515bedd09e3260018c917ce.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
+      `https://6515bedd09e3260018c917ce.mockapi.io/items?search=${search}&${category}&sortBy=${sortBy}&order=${order}`
     )
       .then((responce) => responce.json())
       .then((data) => {
@@ -30,7 +30,7 @@ const HomePage = ({ searchValue }) => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
   return (
     <div className="container">
       <div className="content__top">
@@ -44,15 +44,7 @@ const HomePage = ({ searchValue }) => {
       <div className="content__items">
         {isLoading
           ? [...new Array(6)].map((_, index) => <CardSkeleton key={index} />)
-          : items
-              .filter((val) => {
-                return val.title
-                  .toLowerCase()
-                  .includes(searchValue.toLowerCase())
-                  ? true
-                  : false;
-              })
-              .map((obj) => <PizzaCard key={obj.id} {...obj} />)}
+          : items.map((obj) => <PizzaCard key={obj.id} {...obj} />)}
       </div>
     </div>
   );
