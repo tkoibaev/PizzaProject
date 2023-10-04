@@ -1,0 +1,27 @@
+.root {
+  position: relative;
+}
+
+.input {
+  border: 1px solid #fe5f1e;
+  padding: 12px 20px;
+  width: 400px;
+  border-radius: 10px;
+  font-size: 16px;
+
+  &:focus {
+    border: 2px solid #fe5f1e;
+  }
+}
+
+.clear {
+  position: absolute;
+  top: 11px;
+  right: 10px;
+  opacity: 0.3;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

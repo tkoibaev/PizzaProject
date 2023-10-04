@@ -1,34 +1,28 @@
 import Header from "./components/Header/Header";
-import Sort from "./components/Sort/Sort";
-import Categories from "./components/Categories/Categories";
-import PizzaCard from "./components/PizzaBlock/PizzaCard";
-import CardSkeleton from "./components/PizzaBlock/CardSkeleton";
+
 import HomePage from "./Pages/Home/HomePage";
 import NotFound from "./Pages/NotFound/NotFound";
 import Cart from "./Pages/Cart/Cart";
 
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import "./scss/app.scss";
-import { useEffect, useState } from "react";
-
-// import pizzas from "./assets/pizzas.json";
+import { useState } from "react";
 
 function App() {
+  const [searchValue, setSearchValue] = useState();
   //https://6515bedd09e3260018c917ce.mockapi.io/items - mockapi
 
   return (
     <div className="wrapper">
-      <Header />
+      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="content">
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<HomePage searchValue={searchValue} />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );
